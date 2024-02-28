@@ -6,6 +6,10 @@ import os
 token = os.getenv('MAPBOX_TOKEN')
 px.set_mapbox_access_token(token)
 
+st.set_page_config(layout='wide')
+st.markdown("""<style> .reportview-container { top: 0px; } </style>""", unsafe_allow_html=True)
+
+
 df = pd.read_csv("data/full_joined_original_nyc_schools_dataset.csv")
 df_map = df[["location_name","LATITUDE","LONGITUDE","Personal Attention and Support","Student-Teacher Trust","Grades_final_text","Administrative_District_Name"]]
 df_map["Student Teacher Trust (Normalized)"] = 1 / df_map['Student-Teacher Trust'].astype('int') / 100
@@ -18,8 +22,9 @@ fig = px.scatter_mapbox(df_map,
                         hover_name="location_name",
                         color_continuous_scale=px.colors.sequential.RdBu, 
                         size_max=10, 
-                        zoom=10)
+                        zoom=10,
+                        height=800)
 
-st.title('NYC Public Schools: Survey Data')
+st.header('NYC Public Schools: Survey Data')
 
-st.plotly_chart(fig)
+st.plotly_chart(fig, use_container_width=True, height=800)
