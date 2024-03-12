@@ -12,7 +12,7 @@ st.markdown("""<style> .reportview-container { top: 0px; } </style>""", unsafe_a
 
 df = pd.read_csv("data/full_joined_original_nyc_schools_dataset.csv")
 
-df_map = df[["location_name","Grades_final_text","LATITUDE","LONGITUDE","Personal Attention and Support","Student-Teacher Trust","Administrative_District_Name"]]
+df_map = df[["location_name","Grades_final_text","primary_address","LATITUDE","LONGITUDE","Personal Attention and Support","Student-Teacher Trust","Administrative_District_Name"]]
 
 # school_type = st.selectbox('Select School Type', 
 #                            df_map['Grades_final_text'].unique() )
@@ -30,7 +30,7 @@ fig = px.scatter_mapbox(filtered_df,
                         # color="Personal Attention and Support", 
                         size="Personal Attention and Support (Normalized)",
                         hover_name="location_name",
-                        hover_data=["location_name","Grades_final_text","Personal Attention and Support (Normalized)","Student Teacher Trust (Normalized)"],
+                        hover_data=["location_name","Grades_final_text","Personal Attention and Support (Normalized)","Student Teacher Trust (Normalized)","primary_address"],
                         # color_continuous_scale=px.colors.sequential.RdBu, 
                         size_max=10, 
                         zoom=10,
